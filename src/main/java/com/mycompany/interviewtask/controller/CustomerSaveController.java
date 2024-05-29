@@ -1,9 +1,9 @@
 package com.mycompany.interviewtask.controller;
 
 import com.mycompany.interviewtask.controller.model.RunCustomerSaveRequest;
-import com.mycompany.interviewtask.service.impl.CustomerServiceImpl;
+import com.mycompany.interviewtask.service.CustomerService;
+import com.mycompany.interviewtask.service.batch.BatchCustomerService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +16,7 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class CustomerSaveController {
 
-    private final CustomerServiceImpl customerService;
+    private final CustomerService customerService;
 
     @PostMapping("/run")
     public void runCustomerSave(@RequestBody @Valid RunCustomerSaveRequest request) {
