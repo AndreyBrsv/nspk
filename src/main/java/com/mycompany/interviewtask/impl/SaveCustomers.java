@@ -78,7 +78,7 @@ public class SaveCustomers {
 
         // А здесь мы все сохраняем в БД
         String sql = "INSERT INTO "
-                + "my_schema.customers "
+                + "customers "
                 + "(first_name,last_name,phone_number,rating ) "
                 + "VALUES " + "(?,?,?,?)";
 
