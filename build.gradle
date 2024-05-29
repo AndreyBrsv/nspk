@@ -27,6 +27,8 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.0'
     implementation 'org.postgresql:postgresql:42.5.0'
 
+    implementation "me.paulschwarz:spring-dotenv:3.0.0"
+
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'com.h2database:h2'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
