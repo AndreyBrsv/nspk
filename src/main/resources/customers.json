@@ -38,5 +38,13 @@
     "numberOfPurchases": "50",
     "numberOfReturns": "0",
     "phoneNumber": "+7-111-222-33-44"
+  },
+  {
+    "firstName": "Galina",
+    "lastName": "Petrovovna with bad phone",
+    "status": "gold",
+    "numberOfPurchases": "50",
+    "numberOfReturns": "0",
+    "phoneNumber": "+7-111 a 222-33-44"
   }
 ]
