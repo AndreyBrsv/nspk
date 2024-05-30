@@ -2,9 +2,11 @@ package com.mycompany.interviewtask.service.impl;
 
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.mycompany.interviewtask.exception.BizException;
 import com.mycompany.interviewtask.model.CustomerDTO;
 import com.mycompany.interviewtask.model.PrivilegeStatus;
+import com.mycompany.interviewtask.serializers.CustomerDTODeserializer;
 import com.mycompany.interviewtask.service.CustomerFileReader;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,7 +33,10 @@ public class CustomerFileReaderImplTest {
 
     @BeforeEach
     public void init() {
+        SimpleModule module = new SimpleModule();
+        module.addDeserializer(CustomerDTO.class, new CustomerDTODeserializer());
         objectMapper.enable(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS);
+        objectMapper.registerModule(module);
     }
 
     @Test

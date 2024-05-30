@@ -4,6 +4,7 @@ import lombok.Getter;
 
 @Getter
 public enum PrivilegeStatus {
+    NO_CARD(0),
     SILVER(10),
     GOLD(100),
     PLATINUM(1000);
