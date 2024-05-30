@@ -1,0 +1,10 @@
+[
+  {
+    "firstName": "Ivan",
+    "lastName": "Ivanov",
+    "status": "silver",
+    "numberOfPurchases": "100",
+    "numberOfReturns": "9",
+    "phoneNumber": "+7-999-888-77-66"
+  }
+]

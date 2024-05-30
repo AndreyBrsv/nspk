@@ -27,18 +27,20 @@ public class PhoneServiceImpl implements PhoneService {
         var now = LocalDateTime.now(ZoneId.of("GMT+3"));
         var filename = TXT_PHONES_FILENAME + "_" + now.format(DATE_TIME_FORMATTER);
 
-        var sortedPhones = phones.stream()
+        var sortedValidPhones = phones.stream()
                 .filter(this::checkValidPhone)
                 .filter(it -> !it.startsWith("+7"))
                 .sorted()
                 .collect(Collectors.toList());
 
-        if (!sortedPhones.isEmpty()) {
+        if (!sortedValidPhones.isEmpty()) {
             try (PrintWriter writer = new PrintWriter(filename)) {
-                sortedPhones.forEach(writer::println);
+                sortedValidPhones.forEach(writer::println);
             } catch (Exception e) {
-                log.error("Error when save phones: {}", e.getMessage());
+                log.error("Error when save phones: {}", e.getMessage(), e);
             }
+        } else {
+            log.warn("No valid phones to save");
         }
     }
 

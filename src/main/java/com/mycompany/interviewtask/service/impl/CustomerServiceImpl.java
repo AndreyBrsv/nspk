@@ -1,5 +1,7 @@
 package com.mycompany.interviewtask.service.impl;
 
+import com.mycompany.interviewtask.exception.BizException;
+import com.mycompany.interviewtask.exception.CustomInternalException;
 import com.mycompany.interviewtask.model.CustomerDTO;
 import com.mycompany.interviewtask.repository.CustomersRepository;
 import com.mycompany.interviewtask.repository.model.CustomerDO;
@@ -12,8 +14,9 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import static com.mycompany.interviewtask.exception.ErrorCodes.EMPTY_CUSTOMERS;
 
 @Service
 @RequiredArgsConstructor
@@ -36,10 +39,12 @@ public class CustomerServiceImpl implements CustomerService {
             try {
                 customersRepository.saveAll(customersToSave);
             } catch (Exception e) {
-                log.error("Exception when save customers to database: {}", e.getMessage());
+                log.error("Exception when save customers to database: {}", e.getMessage(), e);
+                throw new CustomInternalException("Exception when save customers to database");
             }
         } else {
             log.warn("No one customers to save");
+            throw new BizException(EMPTY_CUSTOMERS, "No one customers to save");
         }
     }
 
