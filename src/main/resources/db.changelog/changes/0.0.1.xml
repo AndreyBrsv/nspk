@@ -25,5 +25,8 @@
             </column>
             <column name="rating" type="INT"/>
         </createTable>
+        <createIndex tableName="customers" indexName="customers_phone_number_index">
+            <column name="phone_number"/>
+        </createIndex>
     </changeSet>
 </databaseChangeLog>

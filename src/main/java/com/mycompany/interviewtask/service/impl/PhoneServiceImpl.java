@@ -18,7 +18,7 @@ public class PhoneServiceImpl implements PhoneService {
 
     private static final String TXT_PHONES_FILENAME = "phone_numbers";
     private static final Pattern PHONE_PATTERN = Pattern.compile("^\\+\\d{1,2}-\\d{3}-\\d{3}-\\d{2}-\\d{2}$");
-    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyyMMdd_hhmm");
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyyMMdd_hh-mm-ss");
 
     @Override
     public void saveTxtPhones(List<String> phones) {
