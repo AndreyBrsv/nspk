@@ -23,7 +23,7 @@ public class DatasourceConfiguration {
 
         config.setUsername(databaseProperties.getUsername());
         config.setPassword(databaseProperties.getPassword());
-        config.setJdbcUrl("jdbc:postgresql://localhost:5432/" + databaseProperties.getDatabase() + "?prepareThreshold=0");
+        config.setJdbcUrl(databaseProperties.getUrl());
         config.setDriverClassName("org.postgresql.Driver");
         config.setMaxLifetime(600_000);
         config.setMaximumPoolSize(20);

@@ -8,14 +8,14 @@ import liquibase.Liquibase;
 import liquibase.database.DatabaseFactory;
 import liquibase.database.jvm.JdbcConnection;
 import liquibase.integration.spring.SpringResourceAccessor;
+import org.junit.ClassRule;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.DefaultResourceLoader;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.PostgreSQLContainer;
-import org.testcontainers.junit.jupiter.Container;
 
 import java.sql.DriverManager;
 
@@ -23,7 +23,7 @@ import java.sql.DriverManager;
 @SpringBootTest(classes = InterviewTaskApplication.class)
 public class TestContainersConfig {
 
-    @Container
+    @ClassRule
     private static final PostgreSQLContainer<?> postgresqlContainer = new PostgreSQLContainer<>("postgres:13.3")
             .withDatabaseName("integration-tests")
             .withUsername("test")
@@ -38,7 +38,7 @@ public class TestContainersConfig {
         var connection = DriverManager.getConnection(jdbcUrl, username, password);
         var database = DatabaseFactory.getInstance().findCorrectDatabaseImplementation(new JdbcConnection(connection));
         var liquibase = new Liquibase(
-                "src/main/resources/db.changelog/changelog-master.xml",
+                "db.changelog/changelog-master.xml",
                 new SpringResourceAccessor(new DefaultResourceLoader()),
                 database
         );
@@ -46,9 +46,12 @@ public class TestContainersConfig {
         liquibase.update(new Contexts(), new LabelExpression());
     }
 
-    @Test
-    public void testFirst() {
-
+    @DynamicPropertySource
+    static void initProperties(DynamicPropertyRegistry registry) {
+        registry.add("database.username", postgresqlContainer::getUsername);
+        registry.add("database.password", postgresqlContainer::getPassword);
+        registry.add("database.url", postgresqlContainer::getJdbcUrl);
+        postgresqlContainer.start();
     }
 }
 

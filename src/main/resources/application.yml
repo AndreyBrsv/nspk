@@ -3,6 +3,6 @@ spring:
     change-log: "classpath:db.changelog/changelog-master.xml"
 
 database:
-  database: ${DATABASE_NAME}
   username: ${DATABASE_USER}
   password: ${DATABASE_PASSWORD}
+  url: ${DATABASE_URL}
