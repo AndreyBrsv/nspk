@@ -1,15 +1,11 @@
 package com.mycompany.interviewtask.service.impl;
 
-import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.mycompany.interviewtask.exception.BizException;
 import com.mycompany.interviewtask.model.CustomerDTO;
 import com.mycompany.interviewtask.model.PrivilegeStatus;
-import com.mycompany.interviewtask.serializers.CustomerDTODeserializer;
 import com.mycompany.interviewtask.service.CustomerFileReader;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -30,14 +26,6 @@ public class CustomerFileReaderImplTest {
 
     @Autowired
     private ObjectMapper objectMapper;
-
-    @BeforeEach
-    public void init() {
-        SimpleModule module = new SimpleModule();
-        module.addDeserializer(CustomerDTO.class, new CustomerDTODeserializer());
-        objectMapper.enable(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS);
-        objectMapper.registerModule(module);
-    }
 
     @Test
     @DisplayName("Should read file correctly")

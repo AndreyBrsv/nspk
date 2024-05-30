@@ -14,4 +14,12 @@ public enum PrivilegeStatus {
     PrivilegeStatus(int rating) {
         this.rating = rating;
     }
+
+    public static PrivilegeStatus getStatus(String status) {
+        try {
+            return PrivilegeStatus.valueOf(status.toUpperCase());
+        } catch (Exception e) {
+            return PrivilegeStatus.NO_CARD;
+        }
+    }
 }
